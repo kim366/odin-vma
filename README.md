@@ -21,5 +21,8 @@ if vma.CreateAllocator(&create_info, &allocator) != .SUCCESS {
 
 ```
 
+## Notes on Linux
+On Linux build the library yourself. The helper script `setup.sh` is available. It is important to then build your Odin project with `-extra-linker-flags:-lstdc++` as VulkanMemoryAllocator is implemented in C++ using the C++ standard library which is not automatically linked.
+
 ## Introduction to vma
 https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/quick_start.html#quick_start_initialization

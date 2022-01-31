@@ -6,7 +6,11 @@ import vk "vendor:vulkan"
 PFN_vmaAllocateDeviceMemoryFunction :: proc "c" (allocator : Allocator, memoryType : u32, memory : vk.DeviceMemory, size : vk.DeviceSize, pUserData : rawptr)
 PFN_vmaFreeDeviceMemoryFunction :: proc "c" (allocator : Allocator, memoryType : u32, memory : vk.DeviceMemory, size : vk.DeviceSize, pUserData : rawptr)
 
-foreign import VulkanMemoryAllocator "external/VulkanMemoryAllocator.lib"
+when ODIN_OS == "linux" {
+	foreign import VulkanMemoryAllocator "external/libVulkanMemoryAllocator.a"	
+} else {
+	foreign import VulkanMemoryAllocator "external/VulkanMemoryAllocator.lib"
+}
 
 create_vulkan_functions :: proc() -> VulkanFunctions {
 	return {
